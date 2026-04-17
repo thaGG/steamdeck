@@ -4,7 +4,7 @@ set -e
 
 REPO_URL="https://github.com/thaGG/steamdeck.git"
 REPO_DIR="/home/deck/steamdeck"
-SCRIPT_PATH="/usr/local/bin/git-sync-steamdeck.sh"
+SCRIPT_PATH="$REPO_DIR/git-sync-steamdeck.sh"
 SERVICE_PATH="/etc/systemd/system/git-sync.service"
 TIMER_PATH="/etc/systemd/system/git-sync.timer"
 LOG_FILE="/var/log/git-sync-steamdeck.log"
