@@ -1,6 +1,6 @@
 param(
     [string]$KmsServer = "158.101.213.238",
-    [string]$LogPath = "C:\Temp\office-activation.log"
+    [string]$LogPath = "C:\Windows\Temp\office-activation.log"
 )
 
 # -------------------------------
