@@ -6,15 +6,15 @@ Tip!: Connect mouse and keyboard.
 
 - Boot Manager: hold `Volume Down` and click the `Power Button`, when you hear the chime, let go of the `Power` button, and you'll be booted into the Boot Manager.
 - Rufus: [https://rufus.ie/en/#download](https://rufus.ie/en/#download)
-- SteamOS Recovery image: [text](https://store.steampowered.com/steamos/download/?ver=steamdeck&snr=100601___)
-- Windows Media Creation Tool: [text](https://www.microsoft.com/nl-nl/software-download/windows11)
-- GParted: [text](https://gparted.org/download.php)
-- rEFInd for SteamDeck: [text](https://github.com/jlobue10/SteamDeck_rEFInd)
+- SteamOS Recovery image: [https://store.steampowered.com/steamos/download/?ver=steamdeck&snr=100601___](https://store.steampowered.com/steamos/download/?ver=steamdeck&snr=100601___)
+- Windows Media Creation Tool: [https://www.microsoft.com/nl-nl/software-download/windows11](https://www.microsoft.com/nl-nl/software-download/windows11)
+- GParted: [https://gparted.org/download.php](https://gparted.org/download.php)
+- rEFInd for SteamDeck: [https://github.com/jlobue10/SteamDeck_rEFInd](https://github.com/jlobue10/SteamDeck_rEFInd)
 
 
 # 1 - Install SteamOS (optional)
 
-SteamOS Installation and Repair [text](https://help.steampowered.com/en/faqs/view/65B4-2AA3-5F37-4227)
+SteamOS Installation and Repair [https://help.steampowered.com/en/faqs/view/65B4-2AA3-5F37-4227](https://help.steampowered.com/en/faqs/view/65B4-2AA3-5F37-4227)
 
 - Download the SteamOS Recovery image.
 - Prepare a USB key (8GB minimum) with the recovery image using `Rufus`.
@@ -45,7 +45,7 @@ SteamOS Installation and Repair [text](https://help.steampowered.com/en/faqs/vie
 
 # 4 - Repair SteamOS boot
 
-[text](https://www.youtube.com/watch?v=eUDbLkHDeGY) starting at 01:12.
+[https://www.youtube.com/watch?v=eUDbLkHDeGY](https://www.youtube.com/watch?v=eUDbLkHDeGY) starting at 01:12.
 
 - Use USB device with SteamOS Recovery image.
 - Reboot into the `Boot Manager` and select USB device.
@@ -65,7 +65,7 @@ SteamOS Installation and Repair [text](https://help.steampowered.com/en/faqs/vie
 
 # 4 - Install Boot Manager
 
-[text](https://github.com/jlobue10/SteamDeck_rEFInd)
+[https://github.com/jlobue10/SteamDeck_rEFInd](https://github.com/jlobue10/SteamDeck_rEFInd)
 
 - Reboot into the `Boot Manager`.
 - In the Boot Manager, boot from the 'SteamOS'
