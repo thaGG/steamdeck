@@ -1,6 +1,6 @@
-# Windows Post-Configuration
+# Post-Configuration Windows
 
-## Drivers
+# Drivers
 
 *   **APU driver** - [download here](https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fsteamdeck-packages.steamos.cloud%2Fmisc%2Fwindows%2Fdrivers%2FAerith_Sephiroth_Windows_Driver_2309131113.zip), run setup.exe to install.
 *   **Wi-Fi driver** - [download here](https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fsteamdeck-packages.steamos.cloud%2Fmisc%2Fwindows%2Fdrivers%2FRTLWlanE_WindowsDriver_2024.0.10.137_Drv_3.00.0039_Win11.L.zip), run install.bat to install.
@@ -14,13 +14,10 @@
     *   Don't forget to get the updated APU driver above for audio support.
     *   _This driver is updated as of November 17th, 2023_
 
-## Configuration
+# Configuration
 
 *   Steam Deck Tools: [ayufan/steam-deck-tools](https://github.com/ayufan/steam-deck-tools/releases)
 
-## Software
+# Scripts
 
-*   XBOX : `winget install 9MV0B5HZVK9Z`
-*   Steam : `winget install -e --id Valve.Steam`
-*   Microsoft Visual Studio Code: `winget install -e --id Microsoft.VisualStudioCode`
-*   Git for Windows: `winget install --id Git.Git -e --source winget`
+*   post-config-windows.ps1
