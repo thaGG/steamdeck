@@ -188,47 +188,55 @@ function Start-Configure-PowerSettings {
 # Configure Auto-Login
 # --------------------
 Function Start-Configure-AutoLogin {
-    Write-Host "> Enable    : Auto-Login " -NoNewline
+    param (
+        [ValidateSet("Enable","Disable")]
+        [string]$Mode = "Enable"
+    )
 
     $user = "steamdeck"
     $securePassword = ConvertTo-SecureString "password" -AsPlainText -Force
     $plainPassword = [System.Net.NetworkCredential]::new("", $securePassword).Password
 
-    if (-not (Get-LocalUser -Name $user -ErrorAction SilentlyContinue)) {
-        New-LocalUser -Name $user -Password $securePassword -FullName "Auto Logon User" -PasswordNeverExpires:$true
-    }
-
     $policyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
     $winlogon   = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 
-    Set-RegistryKey $policyPath "DontDisplayLastUserName" 0
-    Set-RegistryKey $winlogon "AutoAdminLogon" "1"
-    Set-RegistryKey $winlogon "ForceAutoLogon" "1"
-    Set-RegistryKey $winlogon "DefaultUserName" $user
-    Set-RegistryKey $winlogon "DefaultPassword" $plainPassword
-    Set-RegistryKey $winlogon "DefaultDomainName" $env:COMPUTERNAME
+    if ($Mode -eq "Enable") {
+        Write-Host "> Enable    : Auto-Login " -NoNewline
 
-    $currentLock = powercfg /GETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONSOLELOCK 2>$null
-    if ($currentLock -notmatch "0x00000000") {
-        Write-Host "Disabling console lock timeout"
+        if (-not (Get-LocalUser -Name $user -ErrorAction SilentlyContinue)) {
+            New-LocalUser -Name $user -Password $securePassword -FullName "Auto Logon User" -PasswordNeverExpires:$true
+        }
+
+        Set-RegistryKey $policyPath "DontDisplayLastUserName" 0
+        Set-RegistryKey $winlogon "AutoAdminLogon" "1"
+        Set-RegistryKey $winlogon "ForceAutoLogon" "1"
+        Set-RegistryKey $winlogon "DefaultUserName" $user
+        Set-RegistryKey $winlogon "DefaultPassword" $plainPassword
+        Set-RegistryKey $winlogon "DefaultDomainName" $env:COMPUTERNAME
+
+        # Disable console lock timeout
         powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONSOLELOCK 0 | Out-Null
         powercfg /SETACTIVE SCHEME_CURRENT | Out-Null
-        $changed = $true
-    }
 
-    foreach ($name in @("LegalNoticeCaption","LegalNoticeText")) {
-        if (Get-ItemProperty -Path $policyPath -Name $name -ErrorAction SilentlyContinue) {
-            Write-Host "Removing $name"
-            Remove-ItemProperty -Path $policyPath -Name $name
-            $changed = $true
+        # Remove legal notice
+        foreach ($name in @("LegalNoticeCaption","LegalNoticeText")) {
+            Remove-ItemProperty -Path $policyPath -Name $name -ErrorAction SilentlyContinue
         }
-    }
 
-    if ($changed) {
-        Write-Host ">> Changed" -ForegroundColor Cyan
+        Write-Host ">> Enabled" -ForegroundColor Green
     }
     else {
-        Write-Host ">> OK" -ForegroundColor Green
+        Write-Host "> Disable   : Auto-Login " -NoNewline
+
+        Set-RegistryKey $winlogon "AutoAdminLogon" "0"
+        Set-RegistryKey $winlogon "ForceAutoLogon" "0"
+
+        # Remove stored credentials
+        foreach ($name in @("DefaultUserName","DefaultPassword","DefaultDomainName")) {
+            Remove-ItemProperty -Path $winlogon -Name $name -ErrorAction SilentlyContinue
+        }
+
+        Write-Host ">> Disabled" -ForegroundColor Yellow
     }
 }
 
@@ -263,7 +271,7 @@ function Start-Configure-Taskbar {
     Uninstall-Application -Id "9MSSGKG348SP" -Name "MicrosoftWindows.Client.WebExperience"
 }
 
-Start-Configure-AutoLogin
+Start-Configure-AutoLogin -Mode "Enable"
 Start-Configure-PowerSettings
 Start-Configure-Taskbar
 
